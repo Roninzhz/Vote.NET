@@ -52,7 +52,7 @@ namespace Vote.NET
             //{
             //    File.CreateText(Server.MapPath("vote.txt"));
             //}
-            StreamWriter sw = new StreamWriter(filepath);
+            StreamWriter sw = new StreamWriter(filepath,false);
             string str = count[0].ToString();
             for(int i = 1; i < count.Count; i++)
             {
@@ -77,7 +77,7 @@ namespace Vote.NET
                 {
                     int k = rbtlVote.SelectedIndex;
                     //报错
-                    count[k] = int.Parse(count[k].ToString())+1;
+                    count[k] = int.Parse(count[k].ToString()) + 1;
                     PutVote();
                     HttpCookie vCookie = new HttpCookie("vote");
                     vCookie.Value = "vote";
