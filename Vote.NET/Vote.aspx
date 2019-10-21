@@ -38,14 +38,13 @@
                         <asp:ListItem>张群英</asp:ListItem>
                         <asp:ListItem>王子文</asp:ListItem>
                         <asp:ListItem>杨波</asp:ListItem>
-                    </asp:RadioButtonList>
-                    
+                    </asp:RadioButtonList> 
                 </td>
             </tr>
             <tr>
                 <td>
                     <asp:Button ID="btnVote" runat="server" OnClick="btnVote_Click" Text="投票" />
-                    <asp:Button ID="btnView" runat="server" Text="查看" />
+                    <asp:Button ID="btnView" runat="server" Text="查看" OnClick="btnView_Click1" />
                 </td>
             </tr>
             <tr>

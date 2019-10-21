@@ -38,7 +38,7 @@ namespace Vote.NET
             while (sr.Peek() != -1)
             {
                 string str = sr.ReadLine();
-                string[] strVote = str.Split('l');
+                string[] strVote = str.Split('|');
                 foreach (string ss in strVote)
                     count.Add(int.Parse(ss));
             }
@@ -56,7 +56,7 @@ namespace Vote.NET
             string str = count[0].ToString();
             for(int i = 1; i < count.Count; i++)
             {
-                str += "l" + count[i].ToString();
+                str += "|" + count[i].ToString();
             }
             sw.WriteLine(str);
             sw.Close();
@@ -76,7 +76,6 @@ namespace Vote.NET
                 else
                 {
                     int k = rbtlVote.SelectedIndex;
-                    //报错
                     count[k] = int.Parse(count[k].ToString()) + 1;
                     PutVote();
                     HttpCookie vCookie = new HttpCookie("vote");
@@ -87,12 +86,13 @@ namespace Vote.NET
             }
         }
 
-        protected void btnView_Click(object sender, EventArgs e)
+
+        protected void btnView_Click1(object sender, EventArgs e)
         {
             lblView.Text = "各候选人票数：<br/>";
-            for(int i = 0; i < rbtlVote.Items.Count; i++)
+            for (int i = 0; i < rbtlVote.Items.Count; i++)
             {
-                lblView.Text += rbtlVote.Items[i].Value + ":" + "票" + "<br/>";
+                lblView.Text += rbtlVote.Items[i].Value + ":" +count[i]+ "票" + "<br/>";
             }
         }
     }
