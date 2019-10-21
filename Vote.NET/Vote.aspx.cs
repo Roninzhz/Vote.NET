@@ -78,9 +78,10 @@ namespace Vote.NET
                     int k = rbtlVote.SelectedIndex;
                     count[k] = int.Parse(count[k].ToString()) + 1;
                     PutVote();
-                    HttpCookie vCookie = new HttpCookie("vote");
-                    vCookie.Value = "vote";
+                    HttpCookie vCookie = new HttpCookie("Vote");
+                    vCookie.Value = "Vote";
                     vCookie.Expires = DateTime.Now.AddDays(1);
+                    Response.Cookies.Add(vCookie);
                     Response.Write("<script>alert('投票成功');</script>");
                 }
             }
