@@ -116,6 +116,11 @@ namespace Vote.NET
             Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
             Chart1.ChartAreas["ChartArea1"].AxisY.Minimum = 1;
             Chart1.ChartAreas["ChartArea1"].BackColor = Color.Wheat;
+            lblView.Text = "各候选人票数：<br/>";
+            for (int i = 0; i < rbtlVote.Items.Count; i++)
+            {
+                lblView.Text += rbtlVote.Items[i].Value + ":" + count[i] + "票" + "<br/>";
+            }
         }
     }
 }
