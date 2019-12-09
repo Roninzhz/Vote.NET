@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections;
+using System.Data;
+using System.Drawing;
+using System.Web.UI.DataVisualization.Charting;
 
 namespace Vote.NET
 {
@@ -90,11 +93,29 @@ namespace Vote.NET
 
         protected void btnView_Click1(object sender, EventArgs e)
         {
-            lblView.Text = "各候选人票数：<br/>";
-            for (int i = 0; i < rbtlVote.Items.Count; i++)
+            DataTable dt = new DataTable("tempVote");
+            DataColumn colName = new DataColumn("name", typeof(string));
+            DataColumn colVote = new DataColumn("vote", typeof(int));
+            dt.Columns.Add(colName);
+            dt.Columns.Add(colVote);
+            for (int i = 0; i < count.Count; i++)
             {
-                lblView.Text += rbtlVote.Items[i].Value + ":" +count[i]+ "票" + "<br/>";
+                DataRow dr = dt.NewRow();
+                dr["name"] = rbtlVote.Items[i].Value;
+                dr["vote"] = count[i];
+                dt.Rows.Add(dr);
             }
+            DataView dw = new DataView(dt);
+            Chart1.BackColor = Color.WhiteSmoke;
+            Chart1.Titles.Add("新闻人物投票统计表");
+            Chart1.Series["Series1"].ChartType = SeriesChartType.Column;
+            Chart1.Series["Series1"].Points.DataBindXY(dw, "name", dw, "vote");
+            Chart1.Series["Series1"].IsValueShownAsLabel = true;
+            Chart1.ChartAreas["ChartArea1"].AxisX.Title = "姓名";
+            Chart1.ChartAreas["ChartArea1"].AxisY.Title = "票数";
+            Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+            Chart1.ChartAreas["ChartArea1"].AxisY.Minimum = 1;
+            Chart1.ChartAreas["ChartArea1"].BackColor = Color.Wheat;
         }
     }
 }
